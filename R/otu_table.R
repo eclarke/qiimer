@@ -35,8 +35,8 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
     }
     col_classes <- paste0(col_classes, collapse = "")
     print(col_classes)    
-    full_otu_table <- readr::read_tsv(
-      filepath, col_names = col_names, col_types=col_classes, skip = 2)
+    full_otu_table <- as.data.frame(readr::read_tsv(
+      filepath, col_names = col_names, col_types=col_classes, skip = 2))
 
     print(str(full_otu_table))
     message("Done.")
