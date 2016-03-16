@@ -25,7 +25,7 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
   col_names <- strsplit(header_line, "\t")[[1]]
 
   if (use.readr) {
-    
+    close(f)
     message("Reading table...")
     full_otu_table <- readr::read_tsv(
       filepath, col_names = col_names, skip = 2)
@@ -42,9 +42,10 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
     full_otu_table <- read.table(
       f, col.names=col_names, colClasses=col_classes, sep="\t", 
       quote="", as.is=TRUE, header=FALSE)  
+    close(f)
   }
 
-  close(f)
+
 
   data_cols <- if (metadata) {
     2:(length(col_names) - 1) 
