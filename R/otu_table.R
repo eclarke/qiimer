@@ -29,6 +29,7 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
     message("Reading table...")
     full_otu_table <- readr::read_tsv(
       filepath, col_names = col_names, skip = 2)
+
     message("Done.")
 
   } else {
@@ -59,6 +60,7 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
   counts <- as.matrix(full_otu_table[,data_cols])
   rownames(counts) <- otu_ids
 
+  message("2.5")
   if (metadata) {
     metadata_vals <- as.character(full_otu_table[,length(col_names)])
     names(metadata_vals) <- otu_ids
