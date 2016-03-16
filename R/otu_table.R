@@ -45,17 +45,17 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
     close(f)
   }
 
-
-
+  message("1")
   data_cols <- if (metadata) {
     2:(length(col_names) - 1) 
   } else {
     2:length(col_names)
   } 
-
+  
   sample_ids <- col_names[data_cols]
   otu_ids <- as.character(full_otu_table[,1])
 
+  message("2")
   counts <- as.matrix(full_otu_table[,data_cols])
   rownames(counts) <- otu_ids
 
@@ -66,6 +66,7 @@ read_qiime_otu_table <- function(filepath, commented=TRUE, metadata=TRUE,
     metadata_vals <- NULL
   }
     
+  message("3")
   list(
     sample_ids=sample_ids, otu_ids=otu_ids, counts=counts,
     metadata=metadata_vals)
